@@ -35,9 +35,28 @@ public class EmployeeServiceImpl implements EmployeeService {
         repository.save(mapper.map(employee, EmployeeEntity.class));
     }
 
+
     @Override
     public void deleteEmployee(Integer id) {
         repository.deleteById(id);
 
+    }
+
+    @Override
+    public void updateEmpolyeeById(Integer id, Employee employee) {
+        EmployeeEntity existingEmployee = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+
+        existingEmployee.setName(employee.getName());
+        existingEmployee.setEmail(employee.getEmail());
+        existingEmployee.setDepartment(employee.getDepartment());
+
+        repository.save(existingEmployee);
+
+    }
+
+    @Override
+    public Employee searchEmployeeById(Integer id) {
+        return mapper.map(repository.findById(id),Employee.class) ;
     }
 }

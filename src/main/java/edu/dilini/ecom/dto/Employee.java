@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Employee {
     private Integer id;
     private String name;
-    private String emial;
+    private String email;
     private DepartmentType department;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
